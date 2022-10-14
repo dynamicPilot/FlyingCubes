@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityComponents.Common;
 using UnityComponents.Spawners;
 using UnityEngine;
@@ -31,12 +30,10 @@ namespace Systems.Spawners
         {
             
             _queue.Enqueue(gObj);
-            Debug.Log("Add to collection " + _queue.Count);
         }
 
         public GameObject Spawn(PrefabToSpawn prefab)
         {
-            Debug.Log("Get from collection");
             if (_queue.Count == 0) return _factory.Spawn(prefab);
             else
             {                

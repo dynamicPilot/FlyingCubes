@@ -6,7 +6,13 @@ using UnityEngine;
 
 namespace UnityComponents.Spawners
 {
-    public class SpawnByTimer : MonoBehaviour
+    public interface ISpawnTimer
+    {
+        public void StartSpawn(PrefabToSpawn prefab, CubeParams cubeParams, IFactoryMethod method);
+        public void StopSpawn();
+    }
+
+    public class SpawnByTimer : MonoBehaviour, ISpawnTimer
     {
         WaitForSeconds _timer;
        

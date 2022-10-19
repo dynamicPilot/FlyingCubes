@@ -35,15 +35,15 @@ namespace Systems.Spawners
         public void OnStart()
         {
             _collectorMethod.OnStart();
-            _sceneData.InputUIControl.OnNewStartParams += StartSpawn;
-            _sceneData.InputUIControl.OnStopSpawnCubes += StopSpawn;
+            _sceneData.UIControl.OnNewStartParams += StartSpawn;
+            _sceneData.UIControl.OnStopSpawnCubes += StopSpawn;
         }
 
         public void OnStop()
         {
             _collectorMethod.OnStop();
-            _sceneData.InputUIControl.OnNewStartParams -= StartSpawn;
-            _sceneData.InputUIControl.OnStopSpawnCubes -= StopSpawn;
+            _sceneData.UIControl.OnNewStartParams -= StartSpawn;
+            _sceneData.UIControl.OnStopSpawnCubes -= StopSpawn;
         }
 
 

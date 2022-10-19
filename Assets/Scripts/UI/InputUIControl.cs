@@ -4,7 +4,16 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class InputUIControl : MonoBehaviour
+    public interface IUIControl
+    {
+        public delegate void NewStartParams(CubeParams cubeParams);
+        public event NewStartParams OnNewStartParams;
+
+        public delegate void StopSpawnCubes();
+        public event StopSpawnCubes OnStopSpawnCubes;
+    }
+
+    public class InputUIControl : MonoBehaviour, IUIControl
     {
         [SerializeField] private InputFieldUI _timeField;
         [SerializeField] private InputFieldUI _velocityField;
@@ -12,11 +21,8 @@ namespace UI
         [SerializeField] private Toggle _inLineToggle;
         [SerializeField] private Button _startButton;
 
-        public delegate void NewStartParams(CubeParams cubeParams);
-        public event NewStartParams OnNewStartParams;
-
-        public delegate void StopSpawnCubes();
-        public event StopSpawnCubes OnStopSpawnCubes;
+        public event IUIControl.NewStartParams OnNewStartParams;
+        public event IUIControl.StopSpawnCubes OnStopSpawnCubes;
 
         public void StartSpawn()
         {
@@ -24,7 +30,7 @@ namespace UI
             float velocity = _velocityField.Value;
             float distance = _distanceField.Value;
 
-            if (time > 0 || velocity > 0 || distance > 0)
+            if (time > 0 && velocity > 0 && distance > 0)
             {
                 OnNewStartParams?.Invoke(new CubeParams
                 {
